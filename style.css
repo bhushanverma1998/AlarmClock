@@ -1,22 +1,151 @@
+:root{
+    --color:rgb(216, 104, 0);
+}
 body{
-    overflow: hidden;
     padding: 0;
     margin: 0;
-    height: 100vh;
-    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url('https://th.bing.com/th/id/R.f45d8e22fb0d599fcb161d741fe10761?rik=Yg6JJXgrwQIiTA&riu=http%3a%2f%2fwww.hdwallpaper.nu%2fwp-content%2fuploads%2f2017%2f01%2fclock-4.jpg&ehk=whnhUVMXv9g7S77ShuZsfYfQ5cmKFCBBRMdhn2ytX5E%3d&risl=&pid=ImgRaw&r=0');
-    background-repeat: no-repeat;
+    background-image: url('https://jooinn.com/images/wood-background-71.jpg');
+    background-repeat: repeat-y;
     background-size: cover;
 }
 
+h1{
+    color: white;
+}
+
 #current-time{
-    margin: 10% auto;
+    margin: 2% auto 8% auto;
     font-size: 5vw;
     color: white;
     border: 2px solid white;
     border-radius: .5rem;
     padding: .2rem 1rem;
+    position: relative;
+    backdrop-filter: blur(2px);
+    box-shadow: 0px 0px 5px 2px var(--color);
+    cursor: default;
 }
+
+.set-alarm{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+input[type='number'], .user-zone{
+    width: 8rem;
+    height: 4rem;
+    border-radius: 1rem;
+    border: 1px solid white;
+    padding-left: .4rem;
+    box-shadow: 0px 0px 5px 1px var(--color);
+    background: transparent;
+    backdrop-filter: blur(2px);
+    color: white;
+    cursor: pointer;
+}
+
+input[type='number']:focus{
+    outline: none;
+}
+
+input[type='number']::placeholder{
+    color: white;
+}
+
+#alarm-btn{
+    width: 12rem;
+    height: 4rem;
+    color: white;
+    background-color: var(--color);
+    border: none;
+    cursor: pointer;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 0 1.5rem;
+    transition: all .3s ease-in-out;
+}
+
+#alarm-btn:hover{
+    background-color: red;
+    box-shadow: 0px 0px 5px 1px var(--color);
+}
+
+select option{
+    background-color: var(--color);
+}
+
+
+#alarm-list{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 90%;
+    padding: 2rem;
+    border: 1px solid white;
+    border-radius: 1rem;
+    backdrop-filter: blur(2px);
+    box-shadow: 0px 0px 5px 1px var(--color);
+    margin: 4rem auto;
+}
+
+.alarm-items{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.alarm-time{
+    display: flex;
+    gap:1rem;
+    font-size: xx-large;
+    color: white;
+}
+
+.delete-btn{
+    width: 10rem;
+    height: 3rem;
+    border: none;
+    border-radius: 2rem;
+    background-color: rgb(255, 78, 78);
+    color: white;
+    font-size: 1.5rem;
+    transition: all .2s ease-in;
+}
+
+.delete-btn:hover{
+    background-color: red;
+}
+
+
+
+
+.glow {
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+  
+  @-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--color), 0 0 40px var(--color), 0 0 50px var(--color), 0 0 60px var(--color), 0 0 70px var(--color);
+    }
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+  }
+
+  @media screen and (max-width:820px){
+    .set-alarm{
+        flex-direction: column;
+        gap: 2rem;
+    }
+  }

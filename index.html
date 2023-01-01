@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +8,27 @@
     <link rel="stylesheet" href="style.css">
     <title>Alarm Clock</title>
 </head>
+
 <body>
+    <h1 class="glow">Wake My Up!</h1>
     <div id="current-time"></div>
     <div class="set-alarm">
-        <input type="time" name="setAlarm" id="set-alarm" />
-        <button id="set-Alarm" class="set-Alarm">Set Alarm</button>
-    </div>
-    <div class="alarmlist">
-        <div class="alarm-items">
-            <div class="alarm-time"></div>
-            <div class="delete-btn"><button>Delete</button></div>
+        <div id="user-alarm-input">
+            <input type="number" min="0" max="60" id="user-hr" placeholder="HH" required>
+            <input type="number" min="0" max="60" id="user-min" placeholder="MM" required>
+            <input type="number" min="0" max="60" id="user-sec" placeholder="SS" required>
+            <select class="user-zone" id="user-zone" name="zone" required>
+                <option value="" selected disabled>Zone</option>
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
         </div>
+        <button id="alarm-btn">Set Alarm</button>
+    </div>
+    <div id="alarm-list">
+        
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
