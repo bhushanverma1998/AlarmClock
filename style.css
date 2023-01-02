@@ -7,7 +7,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url('https://jooinn.com/images/wood-background-71.jpg');
+    background-image: url('assets/background.jpg');
     background-repeat: repeat-y;
     background-size: cover;
 }
@@ -47,6 +47,11 @@ input[type='number'], .user-zone{
     backdrop-filter: blur(2px);
     color: white;
     cursor: pointer;
+}
+
+#user-alarm-input{
+    display: flex;
+    gap: .5rem;
 }
 
 input[type='number']:focus{
@@ -144,8 +149,57 @@ select option{
   }
 
   @media screen and (max-width:820px){
+    body{
+        font-size: .75rem;
+    }
     .set-alarm{
         flex-direction: column;
         gap: 2rem;
+    }
+    input[type='number'], .user-zone{
+        width: 6rem;
+        height: 3rem;
+    }
+    #alarm-btn{
+        width: 8rem;
+        font-size: medium;
+    }
+    #alarm-list{
+        font-size: .5rem;
+    }
+    .delete-btn{
+        width: 6rem;
+        font-size: 1rem;
+    }
+    .alarm-time{
+        font-size: 1.5rem;
+    }
+    .glow{
+        font-size: 2rem;
+    }
+  }
+
+  @media screen and (max-width:500px){
+    body{
+        font-size: .5rem;
+    }
+    input[type='number'], .user-zone{
+        width: 4rem;
+        height: 2rem;
+    }
+    #alarm-btn{
+        width: 6rem;
+        height: 3rem;
+        font-size: small;
+    }
+    #alarm-list{
+        font-size: .5rem
+    }
+    .delete-btn{
+        width: 6rem;
+        font-size: 1rem;
+    }
+    .alarm-time{
+        font-size: 1rem;
     }
   }

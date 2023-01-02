@@ -40,9 +40,12 @@ setInterval(() => {
 
     currentTime.innerHTML = `${hr}:${min}:${sec} ${zone}`;
 
-
+    // console.log(Number(alarms[0])-curtime.getTime(),alarms[0])
     //Check for alarms alert
-
+    if(alarms[0]-curtime.getTime()<=0){
+        // console.log("fire alarm")
+        alarmFire(alarms[0]);
+    }
 }, 1000);
 
 //Display the list of alarms
@@ -54,12 +57,13 @@ function renderList() {
         alarms.map((elem) => {
             let date = new Date(elem);
             let hr = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+            hr=hr<10?"0"+hr:hr;
             list += `
         <div class="alarm-items">
         <div class="alarm-time">
             <span>${hr}</span>:
-            <span>${date.getMinutes()}</span>:
-            <span>${date.getSeconds()}</span>:
+            <span>${date.getMinutes()<10?"0"+date.getMinutes():date.getMinutes()}</span>:
+            <span>${date.getSeconds()<10?"0"+date.getSeconds():date.getSeconds()}</span>:
             <span>${date.getHours() > 12 ? "PM" : "AM"}</span>
         </div>
         <button class="delete-btn" id=${date.getTime()}>Delete</button>
@@ -85,6 +89,7 @@ function setAlarm(date) {
 }
 
 function deleteAlarm(alarmId) {
+    //Filter alarm from alarm list
     let newList = alarms.filter((elem) => {
         return elem !== Number(alarmId);
     });
@@ -94,8 +99,28 @@ function deleteAlarm(alarmId) {
     renderList();
 }
 
-function invokeAlarm() {
+function alarmFire(alarm) {
+    let newAlarms=alarms.slice(1);
+    alarms=newAlarms;
+    localStorage.setItem('alarms',JSON.stringify(alarms));
+    let response=confirm("Press Ok! to turn off alarm. Cancel to snooze for 5 minutes");
+    if(response){
+        renderList();
+    }
+    else{
+        //snooze alarm to 5 minutes
+        snoozeAlarm(alarm);
+    }
+}
 
+function snoozeAlarm(alarm){ 
+    let time=new Date(alarm);
+    time.setMinutes(time.getMinutes()+5);
+    alarms.push(time.getTime());
+    alarms.sort();
+    localStorage.setItem('alarms',JSON.stringify(alarms));
+    showNotification("Alarm snoozed to 5 minutes")
+    renderList();
 }
 
 function showNotification(text) {
@@ -111,8 +136,15 @@ document.addEventListener('click', (event) => {
         let userMin = document.getElementById('user-min');
         let userSec = document.getElementById('user-sec');
         let userZone = document.getElementById('user-zone');
-        if (userHr.value === '' || userMin.value === '' || userSec.value === '' || userZone.value === '') {
+
+        //Check upper and lower conditions for valid time
+        if (userHr.value === '' || userMin.value === '' || userSec.value === '' || userZone.value === '' ||userHr.value < 0 || userHr.value>12 || userMin.value < 0 || userMin.value > 60 || userSec.value < 0 || userSec.value > 60) {
             showNotification("Set a valid input in alarm");
+            userHr.value='';
+            userMin.value='';
+            userSec.value='';
+            userZone.value='';
+            return;
         }
         else {
             //if zone is PM add 12 in hour
@@ -123,12 +155,14 @@ document.addEventListener('click', (event) => {
             else {
                 newHr = Number(userHr.value);
             }
+
             //Set the alarm
             let date = new Date();
             date.setHours(newHr);
             date.setMinutes(Number(userMin.value));
             date.setSeconds(Number(userSec.value));
             let alarmTime = date - new Date();
+
             //If alarm is set less than current time set the alarm for next day
             if (alarmTime < 0) {
                 date.setDate(date.getDate() + 1);
