@@ -40,10 +40,8 @@ setInterval(() => {
 
     currentTime.innerHTML = `${hr}:${min}:${sec} ${zone}`;
 
-    // console.log(Number(alarms[0])-curtime.getTime(),alarms[0])
     //Check for alarms alert
     if(alarms[0]-curtime.getTime()<=0){
-        // console.log("fire alarm")
         alarmFire(alarms[0]);
     }
 }, 1000);
@@ -99,6 +97,7 @@ function deleteAlarm(alarmId) {
     renderList();
 }
 
+//Trigger alarm alert when invoked
 function alarmFire(alarm) {
     let newAlarms=alarms.slice(1);
     alarms=newAlarms;
@@ -108,11 +107,11 @@ function alarmFire(alarm) {
         renderList();
     }
     else{
-        //snooze alarm to 5 minutes
         snoozeAlarm(alarm);
     }
 }
 
+//Snooze alarm by 5 minutes
 function snoozeAlarm(alarm){ 
     let time=new Date(alarm);
     time.setMinutes(time.getMinutes()+5);
