@@ -158,7 +158,6 @@ document.addEventListener('click', (event) => {
             //Set the alarm
             let date = new Date();
             date.setHours(newHr);
-            console.log(newHr,userHr);
             date.setMinutes(Number(userMin.value));
             date.setSeconds(Number(userSec.value));
             let alarmTime = date - new Date();
@@ -167,7 +166,6 @@ document.addEventListener('click', (event) => {
             if (alarmTime < 0) {
                 date.setDate(date.getDate() + 1);
             }
-            console.log(date);
             setAlarm(date);
             userHr.value='';
             userMin.value='';
