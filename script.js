@@ -24,7 +24,7 @@ setInterval(() => {
     let hr = curtime.getHours();
     let min = curtime.getMinutes();
     let sec = curtime.getSeconds();
-    let zone = hr > 12 ? "PM" : "AM";
+    let zone = hr >= 12 ? "PM" : "AM";
     if (hr > 12) {
         hr = hr % 12;
     }
