@@ -59,7 +59,7 @@ function renderList() {
             list += `
         <div class="alarm-items">
         <div class="alarm-time">
-            <span>${hr}</span>:
+            <span>${hr==='00'?12:hr}</span>:
             <span>${date.getMinutes()<10?"0"+date.getMinutes():date.getMinutes()}</span>:
             <span>${date.getSeconds()<10?"0"+date.getSeconds():date.getSeconds()}</span>:
             <span>${date.getHours() >= 12 ? "PM" : "AM"}</span>
@@ -152,7 +152,7 @@ document.addEventListener('click', (event) => {
                 newHr =Number(userHr.value)===12?Number(userHr.value):Number(userHr.value) + 12;
             }
             else {
-                newHr = Number(userHr.value);
+                newHr =Number(userHr.value)===12?0: Number(userHr.value);
             }
 
             //Set the alarm
