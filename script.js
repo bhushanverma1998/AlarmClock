@@ -62,7 +62,7 @@ function renderList() {
             <span>${hr}</span>:
             <span>${date.getMinutes()<10?"0"+date.getMinutes():date.getMinutes()}</span>:
             <span>${date.getSeconds()<10?"0"+date.getSeconds():date.getSeconds()}</span>:
-            <span>${date.getHours() > 12 ? "PM" : "AM"}</span>
+            <span>${date.getHours() >= 12 ? "PM" : "AM"}</span>
         </div>
         <button class="delete-btn" id=${date.getTime()}>Delete</button>
         </div>
@@ -149,7 +149,7 @@ document.addEventListener('click', (event) => {
             //if zone is PM add 12 in hour
             let newHr
             if (userZone.value === "PM") {
-                newHr = Number(userHr.value) + 12;
+                newHr =Number(userHr.value)===12?Number(userHr.value):Number(userHr.value) + 12;
             }
             else {
                 newHr = Number(userHr.value);
@@ -158,6 +158,7 @@ document.addEventListener('click', (event) => {
             //Set the alarm
             let date = new Date();
             date.setHours(newHr);
+            console.log(newHr,userHr);
             date.setMinutes(Number(userMin.value));
             date.setSeconds(Number(userSec.value));
             let alarmTime = date - new Date();
@@ -166,6 +167,7 @@ document.addEventListener('click', (event) => {
             if (alarmTime < 0) {
                 date.setDate(date.getDate() + 1);
             }
+            console.log(date);
             setAlarm(date);
             userHr.value='';
             userMin.value='';
